@@ -1,5 +1,7 @@
 function toArr(any) {
-	return any == null ? [] : Array.isArray(any) ? any : [any];
+	if (any == null) return [];
+	if (Array.isArray(any)) return any;
+	return [any];
 }
 
 function toVal(out, key, val, opts) {
