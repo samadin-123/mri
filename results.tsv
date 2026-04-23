@@ -1,3 +1,4 @@
 thesis	attempt	metric	baseline	status	summary
 #1	thesis/1-cache-opts-string-and-opts-boolean-array-lookups	1875212.0000	1830035.0000	accepted	Hybrid lookup optimization: object lookups for arrays >2 elements, indexOf for smaller arrays. Provides 2-3% improvement while avoiding overhead on empty/small arrays.
 #2	thesis/2-eliminate-charcodeat-calls-by-comparing-characters-directly	1770924.0000	1875212.0000	discarded	Replaced charCodeAt calls with direct character comparisons on lines 86, 99, and 103. All 84 tests pass. Performance decreased by ~5.6% (1,770,924 vs 1,875,212 ops/sec). Modern JS engines appear to optimize charCodeAt better than string indexing for character comparisons in this hot path.
+#3	thesis/3-hoist-toarr-and-toval-to-module-scope	1795122.0000	1716193.0000	non_improvement	Refactored toArr from nested ternary to sequential if-statements for better JIT optimization. Performance improved ~4.6%.
