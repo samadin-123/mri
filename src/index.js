@@ -4,9 +4,9 @@ function toArr(any) {
 
 function toVal(out, key, val, opts) {
 	var x, old=out[key], nxt=(
-		!!~opts.string.indexOf(key) ? (val == null || val === true ? '' : String(val))
+		(opts.stringLookup ? opts.stringLookup[key] : !!~opts.string.indexOf(key)) ? (val == null || val === true ? '' : String(val))
 		: typeof val === 'boolean' ? val
-		: !!~opts.boolean.indexOf(key) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
+		: (opts.booleanLookup ? opts.booleanLookup[key] : !!~opts.boolean.indexOf(key)) ? (val === 'false' ? false : val === 'true' || (out._.push((x = +val,x * 0 === 0) ? x : val),!!val))
 		: (x = +val,x * 0 === 0) ? x : val
 	);
 	out[key] = old == null ? nxt : (Array.isArray(old) ? old.concat(nxt) : [old, nxt]);
@@ -56,6 +56,19 @@ export default function (args, opts) {
 					opts[name].push(arr[i]);
 				}
 			}
+		}
+	}
+
+	if (opts.string.length > 2) {
+		opts.stringLookup = {};
+		for (i=0; i < opts.string.length; i++) {
+			opts.stringLookup[opts.string[i]] = 1;
+		}
+	}
+	if (opts.boolean.length > 2) {
+		opts.booleanLookup = {};
+		for (i=0; i < opts.boolean.length; i++) {
+			opts.booleanLookup[opts.boolean[i]] = 1;
 		}
 	}
 
