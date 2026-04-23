@@ -1,1 +1,2 @@
 thesis	attempt	metric	baseline	status	summary
+#1	thesis/1-cache-opts-string-and-opts-boolean-array-lookups	1875212.0000	1830035.0000	accepted	Hybrid lookup optimization: object lookups for arrays >2 elements, indexOf for smaller arrays. Provides 2-3% improvement while avoiding overhead on empty/small arrays.
